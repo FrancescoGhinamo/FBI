@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -13,6 +14,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 import fbi.backend.beam.Crime;
@@ -156,6 +158,12 @@ public class FBIregGUI extends JFrame implements ActionListener {
 
 
 	}
+	
+	public JFileChooser initCrimeFileChooser() {
+		JFileChooser fc = new JFileChooser();
+		fc.setFileFilter(new FileNameExtensionFilter("Crime list", CrimeList.EXTENSION));
+		return fc;
+	}
 
 	public void performAddCrime() {
 
@@ -170,11 +178,34 @@ public class FBIregGUI extends JFrame implements ActionListener {
 	}
 
 	public void performSaveCrimeList() {
-
+		JFileChooser fc = initCrimeFileChooser();
+		if(fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+			String path = fc.getSelectedFile().getAbsolutePath();
+			if(path.endsWith(CrimeList.EXTENSION)) {
+				path += CrimeList.EXTENSION;
+			}
+			CrimeList.getInstance().serialize(path);
+		}
 	}
 
 	public void performOpenCrimeList() {
-
+		JFileChooser fc = initCrimeFileChooser();
+		if(fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+			String path = fc.getSelectedFile().getAbsolutePath();
+			CrimeList.getInstance(path);
+			updateGraphics();
+		}
+	}
+	
+	
+	
+	
+	
+	
+	public JFileChooser initCriminalFileChooser() {
+		JFileChooser fc = new JFileChooser();
+		fc.setFileFilter(new FileNameExtensionFilter("Criminal list", CriminalList.EXTENSION));
+		return fc;
 	}
 
 	public void performAddCriminal() {
@@ -190,11 +221,23 @@ public class FBIregGUI extends JFrame implements ActionListener {
 	}
 
 	public void performSaveCriminalList() {
-
+		JFileChooser fc = initCriminalFileChooser();
+		if(fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+			String path = fc.getSelectedFile().getAbsolutePath();
+			if(path.endsWith(CriminalList.EXTENSION)) {
+				path += CriminalList.EXTENSION;
+			}
+			CriminalList.getInstance().serialize(path);
+		}
 	}
 
 	public void performOpenCriminalList() {
-
+		JFileChooser fc = initCriminalFileChooser();
+		if(fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+			String path = fc.getSelectedFile().getAbsolutePath();
+			CriminalList.getInstance(path);
+			updateGraphics();
+		}
 	}
 
 	@Override
