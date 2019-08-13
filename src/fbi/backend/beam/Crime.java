@@ -1,5 +1,6 @@
 package fbi.backend.beam;
 
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 public class Crime {
@@ -8,16 +9,32 @@ public class Crime {
 	private GregorianCalendar dateTime;
 	private String description;
 	private String location;
-	
-	
-	
+
+
+
 	public Crime(Criminal criminal, GregorianCalendar dateTime, String description, String location) {
 		super();
 		this.criminal = criminal;
 		this.dateTime = dateTime;
 		this.description = description;
 		this.location = location;
+
 	}
+
+	public String[] toStringArray() {
+
+		String[] data = new String[4];
+
+		data[0] = criminal.getFiscalCode();
+		SimpleDateFormat fmt = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+		data[1] = fmt.format(dateTime.getTime());
+		data[2] = description;		
+		data[3] = location;
+
+
+		return data;
+	}
+
 	public Criminal getCriminal() {
 		return criminal;
 	}
@@ -42,6 +59,6 @@ public class Crime {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	
-	
+
+
 }

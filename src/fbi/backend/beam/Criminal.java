@@ -1,6 +1,7 @@
 package fbi.backend.beam;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 public class Criminal {
@@ -25,6 +26,22 @@ public class Criminal {
 		this.fiscalCode = fiscalCode;
 		this.picture = picture;
 	}
+	
+	public String[] toStringArray() {
+		
+		String[] data = new String[5];
+		
+		data[0] = surname;
+		data[1] = name;
+		data[2] = address;
+		SimpleDateFormat fmt = new SimpleDateFormat("MM/dd/yyyy");
+		data[3] = fmt.format(birthDate.getTime());
+		data[4] = fiscalCode;
+		
+		
+		return data;
+	}
+	
 	public String getSurname() {
 		return surname;
 	}
