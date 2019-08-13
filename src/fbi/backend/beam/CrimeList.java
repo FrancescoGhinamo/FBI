@@ -12,6 +12,7 @@ public class CrimeList extends Hashtable<GregorianCalendar, Crime> {
 
 
 	private static final long serialVersionUID = 7710923749022241740L;
+	public static final String EXTENSION = "cel";
 
 	private static CrimeList me;
 

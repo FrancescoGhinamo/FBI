@@ -11,6 +11,7 @@ public class CriminalList extends Hashtable<String, Criminal> {
 
 	
 	private static final long serialVersionUID = -7822474012882055793L;
+	public static final String EXTENSION = "cll";
 	
 	private static CriminalList me;
 	
