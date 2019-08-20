@@ -21,6 +21,7 @@ import fbi.backend.beam.Crime;
 import fbi.backend.beam.CrimeList;
 import fbi.backend.beam.Criminal;
 import fbi.backend.beam.CriminalList;
+import fbi.frontend.dialogs.CriminalDialog;
 
 public class FBIregGUI extends JFrame implements ActionListener {
 
@@ -209,7 +210,8 @@ public class FBIregGUI extends JFrame implements ActionListener {
 	}
 
 	public void performAddCriminal() {
-
+		CriminalDialog cd = new CriminalDialog(this, true);
+		cd.setVisible(true);
 	}
 
 	public void performEditCriminal() {
