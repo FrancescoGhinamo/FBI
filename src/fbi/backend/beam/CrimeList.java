@@ -19,6 +19,10 @@ public class CrimeList extends Hashtable<GregorianCalendar, Crime> {
 	private CrimeList() {
 		super();
 	}
+	
+	public void put(Crime c) {
+		super.put(c.getDateTime(), c);
+	}
 
 	public static CrimeList getInstance() {
 		if(me == null) {

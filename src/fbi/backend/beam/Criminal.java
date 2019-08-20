@@ -1,11 +1,14 @@
 package fbi.backend.beam;
 
 import java.io.File;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
-public class Criminal {
+public class Criminal implements Serializable {
 
+	
+	private static final long serialVersionUID = 3453297250555452393L;
 	private String surname;
 	private String name;
 	private String address;

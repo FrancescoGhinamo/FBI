@@ -182,8 +182,8 @@ public class FBIregGUI extends JFrame implements ActionListener {
 		JFileChooser fc = initCrimeFileChooser();
 		if(fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
 			String path = fc.getSelectedFile().getAbsolutePath();
-			if(path.endsWith(CrimeList.EXTENSION)) {
-				path += CrimeList.EXTENSION;
+			if(!path.endsWith(CrimeList.EXTENSION)) {
+				path += "." + CrimeList.EXTENSION;
 			}
 			CrimeList.getInstance().serialize(path);
 		}
@@ -246,8 +246,8 @@ public class FBIregGUI extends JFrame implements ActionListener {
 		JFileChooser fc = initCriminalFileChooser();
 		if(fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
 			String path = fc.getSelectedFile().getAbsolutePath();
-			if(path.endsWith(CriminalList.EXTENSION)) {
-				path += CriminalList.EXTENSION;
+			if(!path.endsWith(CriminalList.EXTENSION)) {
+				path += "." + CriminalList.EXTENSION;
 			}
 			CriminalList.getInstance().serialize(path);
 		}
