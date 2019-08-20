@@ -4,7 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -21,6 +24,7 @@ import fbi.backend.beam.Crime;
 import fbi.backend.beam.CrimeList;
 import fbi.backend.beam.Criminal;
 import fbi.backend.beam.CriminalList;
+import fbi.frontend.dialogs.CrimeDialog;
 import fbi.frontend.dialogs.CriminalDialog;
 
 public class FBIregGUI extends JFrame implements ActionListener {
@@ -167,15 +171,53 @@ public class FBIregGUI extends JFrame implements ActionListener {
 	}
 
 	public void performAddCrime() {
-
+		int i = criminalTbl.getSelectedRow();
+		String fiscalCode = "";
+		if(i != -1) {
+			fiscalCode = (String) criminalMod.getValueAt(i, 4);
+		}
+		CrimeDialog cd = new CrimeDialog(this, true, fiscalCode);
+		cd.setVisible(true);
+		if(cd.getCrime() != null) {
+			CrimeList.getInstance().put(cd.getCrime());
+			updateGraphics();
+		}
 	}
 
 	public void performEditCrime() {
-
+		int i = crimeTbl.getSelectedRow();
+		if(i != -1) {
+			String time = (String) crimeMod.getValueAt(i, 1);
+			GregorianCalendar g = new GregorianCalendar();
+			SimpleDateFormat fmt = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+			try {
+				g.setTime(fmt.parse(time));
+				Crime c = CrimeList.getInstance().remove(g);
+				CrimeDialog cd = new CrimeDialog(this, true, c);
+				cd.setVisible(true);
+				if(cd.getCrime() != null) {
+					CrimeList.getInstance().put(cd.getCrime());
+				}
+				updateGraphics();
+			} catch (ParseException e) {}
+			
+		}
 	}
 
 	public void performRemoveCrime() {
-
+		int i = crimeTbl.getSelectedRow();
+		if(i != -1) {
+			String time = (String) crimeMod.getValueAt(i, 1);
+			GregorianCalendar g = new GregorianCalendar();
+			SimpleDateFormat fmt = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+			try {
+				g.setTime(fmt.parse(time));
+				CrimeList.getInstance().remove(g);
+				
+				updateGraphics();
+			} catch (ParseException e) {}
+			
+		}
 	}
 
 	public void performSaveCrimeList() {
