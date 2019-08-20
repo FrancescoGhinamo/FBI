@@ -212,14 +212,34 @@ public class FBIregGUI extends JFrame implements ActionListener {
 	public void performAddCriminal() {
 		CriminalDialog cd = new CriminalDialog(this, true);
 		cd.setVisible(true);
+		if(cd.getCriminal() != null) {
+			CriminalList.getInstance().put(cd.getCriminal());
+		}
+		updateGraphics();
 	}
 
 	public void performEditCriminal() {
-
+		int i = criminalTbl.getSelectedRow();
+		if(i != -1) {
+			String fiscalCode = (String) criminalMod.getValueAt(i, 4);
+			Criminal c = CriminalList.getInstance().remove(fiscalCode);
+			CriminalDialog cd = new CriminalDialog(this, true, c);
+			cd.setVisible(true);
+			if(cd.getCriminal() != null) {
+				CriminalList.getInstance().put(cd.getCriminal());
+			}
+			updateGraphics();
+		}
+		
 	}
 
 	public void performRemoveCriminal() {
-
+		int i = criminalTbl.getSelectedRow();
+		if(i != -1) {
+			String fiscalCode = (String) criminalMod.getValueAt(i, 4);
+			CriminalList.getInstance().remove(fiscalCode);
+			updateGraphics();
+		}
 	}
 
 	public void performSaveCriminalList() {

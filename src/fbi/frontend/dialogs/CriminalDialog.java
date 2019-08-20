@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -52,6 +53,11 @@ public class CriminalDialog extends JDialog implements ActionListener {
 		picture = null;
 		
 	}
+	
+	public CriminalDialog(JFrame owner, boolean modale, Criminal source) {
+		this(owner, modale);
+		writeComponents(source);
+	}
 
 	private void initComponents() {
 		setLayout(new GridBagLayout());
@@ -75,6 +81,18 @@ public class CriminalDialog extends JDialog implements ActionListener {
 		this.add(initButPanel(), gbc);
 		
 	}
+	
+	private void writeComponents(Criminal s) {
+		txtSurname.setText(s.getSurname());
+		txtName.setText(s.getName());
+		txtAddress.setText(s.getAddress());
+		dpBirth.setDate(s.getBirthDate());
+		txtFiscalCode.setText(s.getFiscalCode());
+		picture = s.getPicture();
+		ImageIcon i = new ImageIcon(new ImageIcon(picture.getAbsolutePath()).getImage().getScaledInstance(lblPicture.getWidth(), lblPicture.getHeight(), Image.SCALE_DEFAULT));
+		lblPicture.setIcon(i);
+	}
+	
 	
 	private JPanel initFieldPanel() {
 		JPanel pan = new JPanel(new GridLayout(5, 2, 3, 3));
@@ -131,7 +149,7 @@ public class CriminalDialog extends JDialog implements ActionListener {
 		JFileChooser fc = initFileChooser();
 		if(fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
 			picture = fc.getSelectedFile();
-			ImageIcon i = new ImageIcon(picture.getAbsolutePath());
+			ImageIcon i = new ImageIcon(new ImageIcon(picture.getAbsolutePath()).getImage().getScaledInstance(lblPicture.getWidth(), lblPicture.getHeight(), Image.SCALE_DEFAULT));
 			lblPicture.setIcon(i);
 		}
 	}

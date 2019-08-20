@@ -19,6 +19,10 @@ public class CriminalList extends Hashtable<String, Criminal> {
 		super();
 	}
 	
+	public void put(Criminal c) {
+		super.put(c.getFiscalCode(), c);
+	}
+	
 	public static CriminalList getInstance() {
 		if(me == null) {
 			me = new CriminalList();
