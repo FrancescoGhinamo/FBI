@@ -91,6 +91,7 @@ public class CriminalDialog extends JDialog implements ActionListener {
 		picture = s.getPicture();
 		ImageIcon i = new ImageIcon(new ImageIcon(picture.getAbsolutePath()).getImage().getScaledInstance(lblPicture.getWidth(), lblPicture.getHeight(), Image.SCALE_DEFAULT));
 		lblPicture.setIcon(i);
+		criminal = s;
 	}
 	
 	
